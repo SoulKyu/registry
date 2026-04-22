@@ -26,8 +26,12 @@ lint-mktutorial:
 	cd tools/mktutorial/ && golangci-lint run --config ../../.golangci.yml
 
 .PHONY: test
-test:
+test: test-infra
 	cd ./tools/resourcedocsgen && go test ./...
+
+.PHONY: test-infra
+test-infra:
+	cd infrastructure && node --test redirects.test.js
 
 .PHONY: build
 build: build-assets
@@ -64,7 +68,7 @@ api-docs: bin/resourcedocsgen
 		--baseDocsOutDir ./themes/default/content/registry/packages \
 		--basePackageTreeJSONOutDir ./themes/default/static/registry/packages/navs \
 		--baseSchemasOutDir ./themes/default/static/registry/packages \
-		--baseCLIDocsOutDir ./cli-docs-out/registry/packages \
+		--baseLLMDocsOutDir ./llm-docs-out/registry/packages \
 		--logtostderr
 	$(if $(SKIP_VERSIONED_DOCS),,./scripts/generate-versioned-docs.sh)
 
@@ -82,7 +86,7 @@ api-docs/%: .make/content/registry/packages/$$*/api-docs ;
 		--baseDocsOutDir ./content/registry/packages \
 		--basePackageTreeJSONOutDir ./static/registry/packages/navs \
 		--baseSchemasOutDir ./static/registry/packages \
-		--baseCLIDocsOutDir ./cli-docs-out/registry/packages \
+		--baseLLMDocsOutDir ./llm-docs-out/registry/packages \
 		$*
 	CONTENT_DIR=$(CURDIR)/content/registry/packages STATIC_DIR=$(CURDIR)/static/registry/packages ./scripts/generate-versioned-docs.sh $*
 	@mkdir -p "$(@D)"

@@ -15,10 +15,11 @@ aliases:
     - /docs/clouds/pkg/
 outputs:
     - HTML
-    - clisitemap
+    - markdown
+    - llmsitemap
 cascade:
     # API docs are generated in bulk during CI and don't need markdown or
-    # clisitemap outputs.  Restricting them to HTML avoids a massive build-time
+    # llmsitemap outputs.  Restricting them to HTML avoids a massive build-time
     # multiplier (tens of thousands of extra pages).
     - outputs:
           - HTML
@@ -27,7 +28,7 @@ cascade:
     - outputs:
           - HTML
           - markdown
-          - clisitemap
+          - llmsitemap
       _target:
           kind: section
     - outputs:
@@ -36,3 +37,24 @@ cascade:
       _target:
           kind: page
 ---
+
+The Pulumi Registry is the public index of Pulumi packages. It lists first-party Pulumi providers, bridged Terraform providers, and community components for common cloud architectures.
+
+For the full list of packages, see [/registry/packages.md](/registry/packages.md).
+
+Popular providers:
+
+- [AWS](/registry/packages/aws.md)
+- [Azure Native](/registry/packages/azure-native.md)
+- [Google Cloud](/registry/packages/gcp.md)
+- [Kubernetes](/registry/packages/kubernetes.md)
+- [Docker](/registry/packages/docker.md)
+- [Random](/registry/packages/random.md)
+
+Each package exposes several endpoints for programmatic consumers:
+
+- `/registry/packages/<name>/` — hand-authored overview and installation/configuration (HTML; append `.md` or send `Accept: text/markdown` for markdown).
+- `/registry/packages/<name>/llm-sitemap.json` — machine-readable index of the package's pages.
+- `/registry/packages/<name>/schema.json` — canonical Pulumi schema (same artifact `pulumi package get-schema` returns).
+- `/registry/packages/<name>/api-docs/llm-docs.json` — pre-rendered multi-language API documentation bundled into a single JSON file.
+- `/registry/packages/<name>/api-docs/` — per-resource and per-function API reference (HTML).
