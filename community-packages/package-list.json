@@ -387,6 +387,10 @@
     {
       "repoSlug": "lokkju/pulumi-improvmx",
       "schemaFile": "schema.json"
+    },
+    {
+      "repoSlug": "numberly/terraform-provider-mica",
+      "schemaFile": "pulumi/provider/cmd/pulumi-resource-mica/schema.json"
     }
   ]
 }
