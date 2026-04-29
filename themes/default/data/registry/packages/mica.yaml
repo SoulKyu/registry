@@ -1,0 +1,11 @@
+name: mica
+title: Mica (Pure Storage FlashBlade)
+description: UnOfficial Pulumi provider for Purestorage Flashblade via terraform-provider-mica bridge
+publisher: Numberly
+repo_url: https://github.com/numberly/terraform-provider-mica
+schema_file_url: https://raw.githubusercontent.com/numberly/terraform-provider-mica/main/pulumi/provider/cmd/pulumi-resource-mica/schema.json
+package_status: public_preview
+category: infrastructure
+component: false
+featured: false
+native: false
